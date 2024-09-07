@@ -1,28 +1,13 @@
 <script lang="ts">
-    import { goto } from "$app/navigation";
     import bg from "$lib/assets/candyshop.webp";
     import emptyPortrait from "$lib/assets/empty.png";
-    // import {
-    //     characters,
-    //     getActiveDate,
-    //     type CharacterDescriptor,
-    // } from "$lib/character";
-    // import Button from "$lib/components/Button.svelte";
-    // import { DateManager } from "$lib/dateState";
-    // import {
-    //     activeDate,
-    //     activePlace,
-    //     currentDay,
-    //     currentText,
-    // } from "$lib/stores";
-    import { onMount } from "svelte";
+
     import { fade } from "svelte/transition";
 
     import { get } from "svelte/store";
 
-    import cornwitch from "$lib/assets/cornwitch.png";
-    import { DialogManager } from "$lib/utils/dialog";
     import intro from "$lib/story/intro";
+    import { DialogManager } from "$lib/utils/dialog";
 
     let dateInfo = {
         name: "",
