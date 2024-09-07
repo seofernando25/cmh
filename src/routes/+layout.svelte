@@ -1,7 +1,13 @@
-<script>import "../app.css";</script><div>
+<script lang="ts">
+    import "../app.css";
+    import SoundPlayer from "./SoundPlayer.svelte";
+</script>
+
+<div>
+    <SoundPlayer></SoundPlayer>
+
     <slot></slot>
 </div>
-
 
 <style>
     div {

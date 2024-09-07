@@ -1,3 +1,25 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@font-face {
+    font-family: "Howdy Lemon";
+    src: url("/Howdy Lemon.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Howdy Lemon", sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    background-color: #f0f0f0;
+
+    --color-red: #751d1d;
+    --color-brown: #46281a;
+    --color-white: #ece9e8;
+    --color-gray: #816459;
+    --color-yellow: #c1945d;
+    --color-orange: #a05830;
+}

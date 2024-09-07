@@ -1,5 +1,6 @@
 import { get, writable } from "svelte/store";
 import { typewriter } from "./typewriter";
+import { tweened } from "svelte/motion";
 
 export type DialogState = {
     showDate: boolean;
@@ -18,13 +19,15 @@ export type DialogInfo = {
 
 export class DialogManager {
     currentText = writable("");
+    currentPortrait = writable<undefined | string>(undefined);
     currentSpeaker = writable("");
     resolverFn = writable(() => {});
-    showDate = writable(false);
-    dateOpacity = writable(1);
-    prompts = writable<string[]>([]);
+    currentPrompts = writable<string[]>([]);
     pickedPrompt = writable(-1);
-    dateSprite = writable("normal");
+    dateSprite = writable("");
+    dialogOpacity = tweened(1);
+    charLeft = writable<undefined | string>(undefined);
+    charRight = writable<undefined | string>(undefined);
 
     async question(
         question: string,
@@ -32,7 +35,7 @@ export class DialogManager {
         o?: { speed?: number }
     ) {
         this.dialog(question, { speed: o?.speed ?? 25 });
-        this.prompts.set(choices);
+        this.currentPrompts.set(choices);
         this.pickedPrompt.set(-1);
         return new Promise<number>((resolve) => {
             const sub = this.pickedPrompt.subscribe((i) => {
@@ -41,71 +44,71 @@ export class DialogManager {
                 }
                 sub();
                 resolve(i);
-                this.prompts.set([]);
+                this.currentPrompts.set([]);
                 this.pickedPrompt.set(-1);
             });
         });
     }
 
-    async dateFadeIn(duration = 1000, o?: { block?: boolean }) {
-        let block = o?.block ?? false;
-        return new Promise<void>((resolve) => {
-            let start = performance.now();
-            let done = false;
-            this.dateOpacity.set(0);
-            const step = (timestamp: number) => {
-                if (done) {
-                    this.dateOpacity.set(1);
-                    return;
-                }
-                const progress = timestamp - start;
-                this.dateOpacity.set(progress / duration);
-                if (progress < duration) {
-                    window.requestAnimationFrame(step);
-                } else {
-                    this.dateOpacity.set(1);
-                    if (!block) {
-                        get(this.resolverFn)();
-                    }
-                }
-            };
-            window.requestAnimationFrame(step);
-            this.resolverFn.set(() => {
-                done = true;
-                resolve();
-            });
-        });
-    }
+    // async dateFadeIn(duration = 1000, o?: { block?: boolean }) {
+    //     let block = o?.block ?? false;
+    //     return new Promise<void>((resolve) => {
+    //         let start = performance.now();
+    //         let done = false;
+    //         this.dateOpacity.set(0);
+    //         const step = (timestamp: number) => {
+    //             if (done) {
+    //                 this.dateOpacity.set(1);
+    //                 return;
+    //             }
+    //             const progress = timestamp - start;
+    //             this.dateOpacity.set(progress / duration);
+    //             if (progress < duration) {
+    //                 window.requestAnimationFrame(step);
+    //             } else {
+    //                 this.dateOpacity.set(1);
+    //                 if (!block) {
+    //                     get(this.resolverFn)();
+    //                 }
+    //             }
+    //         };
+    //         window.requestAnimationFrame(step);
+    //         this.resolverFn.set(() => {
+    //             done = true;
+    //             resolve();
+    //         });
+    //     });
+    // }
 
-    async dateFadeOut(duration = 1000, o?: { block?: boolean }) {
-        let block = o?.block ?? true;
-        return new Promise<void>((resolve) => {
-            let start = performance.now();
-            let done = false;
-            this.dateOpacity.set(1);
-            const step = (timestamp: number) => {
-                if (done) {
-                    this.dateOpacity.set(0);
-                    return;
-                }
-                const progress = timestamp - start;
-                this.dateOpacity.set(1 - progress / duration);
-                if (progress < duration) {
-                    window.requestAnimationFrame(step);
-                } else {
-                    this.dateOpacity.set(0);
-                    if (!block) {
-                        get(this.resolverFn)();
-                    }
-                }
-            };
-            window.requestAnimationFrame(step);
-            this.resolverFn.set(() => {
-                done = true;
-                resolve();
-            });
-        });
-    }
+    // async dateFadeOut(duration = 1000, o?: { block?: boolean }) {
+    //     let block = o?.block ?? true;
+    //     return new Promise<void>((resolve) => {
+    //         let start = performance.now();
+    //         let done = false;
+    //         this.dateOpacity.set(1);
+    //         const step = (timestamp: number) => {
+    //             if (done) {
+    //                 this.dateOpacity.set(0);
+    //                 return;
+    //             }
+    //             const progress = timestamp - start;
+    //             this.dateOpacity.set(1 - progress / duration);
+    //             if (progress < duration) {
+    //                 window.requestAnimationFrame(step);
+    //             } else {
+    //                 this.dateOpacity.set(0);
+    //                 if (!block) {
+    //                     get(this.resolverFn)();
+    //                 }
+    //             }
+    //         };
+    //         window.requestAnimationFrame(step);
+    //         this.resolverFn.set(() => {
+    //             done = true;
+    //             resolve();
+    //         });
+    //     });
+    // }
 
     async sleep(
         duration = 0,
@@ -142,6 +145,7 @@ export class DialogManager {
         o?: {
             name?: string;
             speed?: number;
+            portrait?: string;
         }
     ) {
         this.currentSpeaker.set(o?.name ?? "");
