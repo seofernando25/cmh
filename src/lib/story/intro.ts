@@ -5,6 +5,8 @@ import corn_sad from "$lib/assets/corn_c.png";
 import { playSong } from "$lib/utils/bgm";
 import { playSFX } from "$lib/utils/sfx";
 
+import cornelia from "$lib/assets/cornwitch.png";
+
 export default async (gameSequence: DialogManager) => {
     gameSequence.dialogOpacity.set(0);
     await gameSequence.sleep(500);
@@ -21,9 +23,11 @@ export default async (gameSequence: DialogManager) => {
 
     gameSequence.currentPortrait.set(corn_happy);
     await dialogMe("It's already autumn...");
+
     await dialogMe(
         "The leaves are falling... I can see the change in the air."
     );
+
     gameSequence.currentPortrait.set(corn_sad);
     await dialogMe(
         "The weather’s getting colder... and with it, I Can't help but to feel lonelier in my quaint little shop."
@@ -40,6 +44,7 @@ export default async (gameSequence: DialogManager) => {
     );
     playSong("Runaway Five The Daily Show");
     gameSequence.currentPortrait.set(undefined);
+    gameSequence.charRight.set(cornelia);
     await gameSequence.dialog(
         "Oh... What a charming place! But it's so... quiet. Where's all the candy?",
         {
@@ -58,6 +63,4 @@ export default async (gameSequence: DialogManager) => {
     await gameSequence.dialog("The witch narrowed her eyes at me.");
     playSFX("Cornelia Hmm");
     await dialogCornelia("You do have candy, right?");
-
-    // TODO Ding dong sound effect
 };

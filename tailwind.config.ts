@@ -3,13 +3,6 @@ import type { Config } from "tailwindcss";
 export default {
     content: ["./src/**/*.{html,js,svelte,ts}"],
 
-    // --color-red: #751d1d;
-    // --color-brown: #46281a;
-    // --color-white: #ece9e8;
-    // --color-gray: #816459;
-    // --color-yellow: #c1945d;
-    // --color-orange: #a05830;
-
     theme: {
         extend: {
             colors: {

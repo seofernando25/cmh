@@ -16,6 +16,8 @@
     //     currentText,
     // } from "$lib/stores";
     import { onMount } from "svelte";
+    import { fade } from "svelte/transition";
+
     import { get } from "svelte/store";
 
     import cornwitch from "$lib/assets/cornwitch.png";
@@ -36,11 +38,9 @@
 
     $: speaker = state.currentSpeaker;
     $: dialogOpacity = state.dialogOpacity;
-    $: dateSpriteState = state.dateSprite;
-    $: prompts = state.currentPrompts;
     $: currentPortrait = state.currentPortrait;
-    $: hasPortrait = currentPortrait !== undefined;
-
+    $: charRight = state.charRight;
+    $: charLeft = state.charLeft;
     $: txt = state.currentText;
 
     const skipAction = () => {
@@ -65,13 +65,15 @@
     }}
 />
 
-<img src={bg} alt="portrait" class="bg" />
+<img src={bg} alt="bg" class="bg" />
 
-<div class="caldron">
-    <div class="caldron-solid"></div>
-</div>
+{#if $charRight}
+    <img transition:fade src={$charRight} alt="portrait" class="char-right" />
+{/if}
 
-<img src={cornwitch} alt="portrait" class="char-right" />
+{#if $charLeft}
+    <img transition:fade src={$charLeft} alt="portrait" class="char-left" />
+{/if}
 
 {#if !clearMode}
     <!-- content here -->
@@ -143,6 +145,21 @@
         /* width: 30%; */
         object-fit: contain;
         transition: all 0.2s ease-out;
+    }
+
+    .char-left {
+        position: absolute;
+        left: 5%;
+        height: 64rem;
+        bottom: -10rem;
+        /* width: 30%; */
+        object-fit: contain;
+        transition: all 0.2s ease-out;
+        transform: scaleX(-1);
+    }
+
+    .char-left:hover {
+        bottom: -8rem;
     }
 
     .char-right:hover {
