@@ -157,7 +157,7 @@
     .char {
         position: absolute;
         transition: all 0.2s ease-out;
-        height: 30em;
+        height: 90%;
         animation: float 0.4s ease-in-out infinite;
     }
 
