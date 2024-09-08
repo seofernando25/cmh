@@ -7,14 +7,7 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@dimforge/rapier2d':
-        specifier: ^0.14.0
-        version: 0.14.0
     devDependencies:
-      '@dimforge/rapier2d-compat':
-        specifier: ^0.14.0
-        version: 0.14.0
       '@sveltejs/adapter-auto':
         specifier: ^3.0.0
         version: 3.2.4(@sveltejs/kit@2.5.26(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.3))(svelte@4.2.19)(vite@5.4.3))
@@ -64,12 +57,6 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
-
-  '@dimforge/rapier2d-compat@0.14.0':
-    resolution: {integrity: sha512-sljQVPstRS63hVLnVNphsZUjH51TZoptVM0XlglKAdZ8CT+kWnmA6olwjkF7omPWYrlKMd/nHORxOUdJDOSoAQ==}
-
-  '@dimforge/rapier2d@0.14.0':
-    resolution: {integrity: sha512-gqFHPytBONq4/fhQGECa9fr7LnWFg+9fX+YTONrK1zt20y+P3P6qarcq2+vpb0L36dR7W0uyCGI2Lyf5dRko+g==}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -1015,10 +1002,6 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
-
-  '@dimforge/rapier2d-compat@0.14.0': {}
-
-  '@dimforge/rapier2d@0.14.0': {}
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
