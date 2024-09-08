@@ -147,8 +147,12 @@ export class DialogManager {
             name?: string;
             speed?: number;
             portrait?: string;
+            autoDelay?: number;
         }
     ) {
+        if (o?.portrait) {
+            this.currentPortrait.set(o.portrait);
+        }
         this.currentSpeaker.set(o?.name ?? "");
         let speed = o?.speed ?? 25;
         return new Promise<void>((resolve) => {
@@ -169,6 +173,12 @@ export class DialogManager {
                 sub();
                 resolve();
             });
+
+            if (o?.autoDelay !== undefined) {
+                setTimeout(() => {
+                    get(this.resolverFn)();
+                }, o.autoDelay);
+            }
         });
     }
 

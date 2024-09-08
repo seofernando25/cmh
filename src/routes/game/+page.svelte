@@ -119,7 +119,7 @@
         bottom: 5%;
         left: 5%;
         right: 5%;
-        top: 75%;
+        top: 72.5%;
 
         background-color: rgb(from #6f1c1b r g b / 0.8);
         box-shadow: 0.5em 0.5em 0.1em #99582a;
@@ -134,7 +134,7 @@
             top: 5%;
             left: 5%;
             right: 5%;
-            bottom: 75%;
+            bottom: 72.5%;
         }
     }
 
