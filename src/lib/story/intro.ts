@@ -37,6 +37,8 @@ export default async (gameSequence: DialogManager) => {
         "The weather’s getting colder... and with it, I Can't help but to feel lonelier in my quaint little shop."
     );
     await dialogMe("Sigh Maybe some day things will be different");
+    gameSequence.currentPortrait.set(undefined);
+
     await gameSequence.dialog(
         `The door chimes softly as a stranger enters the shop.`
     );
