@@ -35,7 +35,7 @@
         /* font-size: 16px; */
     }
 
-    @media (min-aspect-ratio: 16/9) {
+    @media (min-aspect-ratio: 16 / 8.9) {
         .content-wrapper {
             font-size: calc(1vh * (16 / 9) + 1vw * (9 / 16));
         }
