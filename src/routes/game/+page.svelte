@@ -25,6 +25,7 @@
     $: dialogOpacity = state.dialogOpacity;
     $: currentPortrait = state.currentPortrait;
     $: charRight = state.charRight;
+    $: charCenter = state.charCenter;
     $: charLeft = state.charLeft;
     $: txt = state.currentText;
 
@@ -53,11 +54,30 @@
 <img src={bg} alt="bg" class="bg" />
 
 {#if $charRight}
-    <img transition:fade src={$charRight} alt="portrait" class="char-right" />
+    <img
+        transition:fade
+        src={$charRight}
+        alt="portrait"
+        class="char char-right"
+    />
+{/if}
+
+{#if $charCenter}
+    <img
+        transition:fade
+        src={$charCenter}
+        alt="portrait"
+        class="char char-center"
+    />
 {/if}
 
 {#if $charLeft}
-    <img transition:fade src={$charLeft} alt="portrait" class="char-left" />
+    <img
+        transition:fade
+        src={$charLeft}
+        alt="portrait"
+        class="char char-left"
+    />
 {/if}
 
 {#if !clearMode}
@@ -87,32 +107,44 @@
 <style>
     .bg {
         position: absolute;
+
         width: 100%;
-        height: 100vh;
-        /* background-color: black; */
-        /* blur */
+        height: 100%;
         filter: blur(5px);
         scale: 1.1;
+        object-fit: cover;
     }
 
     .dialog {
         position: absolute;
-        padding: 1rem;
+        padding: 0.5em;
         bottom: 5%;
         left: 5%;
         right: 5%;
-        height: 20rem;
+        top: 75%;
+
         background-color: rgb(from #6f1c1b r g b / 0.8);
-        box-shadow: 20px 20px 2px #99582a;
-        border: 0.5rem solid #bb9557;
+        box-shadow: 0.5em 0.5em 0.1em #99582a;
+        border: 0.2rem solid #bb9557;
         display: flex;
         user-select: none;
     }
 
+    /* if mobile use dialog top */
+    @media (max-width: 600px) {
+        .dialog {
+            top: 5%;
+            left: 5%;
+            right: 5%;
+            bottom: 75%;
+        }
+    }
+
     .portrait {
+        flex: 0 0 auto;
         box-sizing: border-box;
         height: 100%;
-        width: 200px;
+        width: 7.5em;
         object-fit: scale-down;
         transition: all 0.2s ease-out;
         user-select: none;
@@ -122,33 +154,51 @@
         width: 0;
     }
 
-    .char-right {
+    .char {
         position: absolute;
-        right: 5%;
-        height: 64rem;
-        bottom: -10rem;
-        /* width: 30%; */
-        object-fit: contain;
         transition: all 0.2s ease-out;
+        height: 30em;
+        animation: float 0.4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0% {
+            translate: 0 0;
+            /* transform: translateY(0); */
+        }
+        50% {
+            /* transform: translateY(-2rem); */
+            translate: 0 -1rem;
+        }
+        100% {
+            /* transform: translateY(0); */
+            translate: 0 0;
+        }
+    }
+
+    .char-right {
+        right: 5%;
+        bottom: -10rem;
+        object-fit: contain;
     }
 
     .char-left {
-        position: absolute;
         left: 5%;
-        height: 64rem;
         bottom: -10rem;
-        /* width: 30%; */
         object-fit: contain;
-        transition: all 0.2s ease-out;
         transform: scaleX(-1);
     }
 
-    .char-left:hover {
-        bottom: -8rem;
+    .char-center {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -10rem;
+        object-fit: contain;
+        scale: 1;
     }
 
-    .char-right:hover {
-        bottom: -8rem;
+    .char:hover {
+        scale: 1.1;
     }
 
     .text {

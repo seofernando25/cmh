@@ -45,7 +45,7 @@
     }
 
     .opt-menu-item {
-        font-size: 4rem;
+        font-size: 2em;
         color: #bb9557;
         text-decoration: none;
         transition: all 0.2s ease-out;
@@ -65,7 +65,7 @@
         top: 0;
         left: 0;
         background-color: #6f1c1b;
-        width: 35rem;
+        width: 20em;
         height: 140%;
         display: flex;
         justify-content: center;
@@ -73,7 +73,7 @@
         border-radius: 0 50% 50% 0;
         translate: -30% -20%;
         /* border */
-        outline: 20px solid #bb9557;
+        outline: 0.75em solid #bb9557;
     }
 
     .center:hover {

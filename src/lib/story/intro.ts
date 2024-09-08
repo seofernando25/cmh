@@ -21,6 +21,10 @@ export default async (gameSequence: DialogManager) => {
         await gameSequence.dialog(text, { name: "Cornelia" });
     };
 
+    // gameSequence.charCenter.set(cornelia);
+    // gameSequence.charLeft.set(cornelia);
+    gameSequence.charRight.set(cornelia);
+
     gameSequence.currentPortrait.set(corn_happy);
     await dialogMe("It's already autumn...");
 

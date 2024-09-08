@@ -28,6 +28,7 @@ export class DialogManager {
     dialogOpacity = tweened(1);
     charLeft = writable<undefined | string>(undefined);
     charRight = writable<undefined | string>(undefined);
+    charCenter = writable<undefined | string>(undefined);
 
     async question(
         question: string,
