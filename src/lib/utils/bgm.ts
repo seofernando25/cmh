@@ -6,11 +6,13 @@ import { Howl } from "howler";
 import { get, writable } from "svelte/store";
 import { persisted } from "./persisted";
 
-export const currentHowl = writable<Howl | null>(null);
+export const bgmVolume = persisted("bgm_volume", 0.5);
+
+export const bgmHowl = writable<Howl | null>(null);
 export const currentSong = writable<SongName | null>(null);
 
 export async function fadeOut(duration = 500) {
-    const howl = get(currentHowl);
+    const howl = get(bgmHowl);
     if (howl) {
         howl.fade(howl.volume(), 0, duration);
         await new Promise((resolve) => {
@@ -21,7 +23,7 @@ export async function fadeOut(duration = 500) {
 }
 
 export async function playSong(song: SongName) {
-    const howl = get(currentHowl);
+    const howl = get(bgmHowl);
     if (howl) {
         // If not playing, just unload
         if (!howl.playing()) {
@@ -46,6 +48,7 @@ export async function playSong(song: SongName) {
     const new_howl = new Howl({
         src: [song_info.url],
         loop: true,
+        volume: get(bgmVolume),
         onplay: () => {
             isPlaying.set(true);
         },
@@ -60,7 +63,7 @@ export async function playSong(song: SongName) {
         },
     });
 
-    currentHowl.set(new_howl);
+    bgmHowl.set(new_howl);
     new_howl.play();
 }
 
@@ -86,10 +89,11 @@ export const sound_track = [
 
 export type SongName = (typeof sound_track)[number]["name"];
 
-export const audioVolume = persisted("audio_volume", 0.5);
-
-audioVolume.subscribe((val) => {
-    Howler.volume(val);
+bgmVolume.subscribe((val) => {
+    const howl = get(bgmHowl);
+    if (howl) {
+        howl.volume(val);
+    }
 });
 
 // Erm... I don't really care tho
@@ -98,7 +102,7 @@ export const isPlaying = writable(false);
 export const currentSeek = writable(0, (set) => {
     let id: number;
     const interval = setInterval(() => {
-        const howl = get(currentHowl);
+        const howl = get(bgmHowl);
         if (howl) {
             set(howl.seek());
         }
@@ -111,7 +115,7 @@ export const currentSeek = writable(0, (set) => {
 export const songDuration = writable(0, (set) => {
     let id: number;
     const interval = setInterval(() => {
-        const howl = get(currentHowl);
+        const howl = get(bgmHowl);
         if (howl) {
             set(howl.duration());
         }

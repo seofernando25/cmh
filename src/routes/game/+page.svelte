@@ -95,8 +95,6 @@
             alt="portrait"
             class="portrait {$currentPortrait ? '' : 'no-potrait'}"
         />
-        <!-- <div class="portrait-container">
-        </div> -->
         <div class="text">
             {$speaker} <br />
             {$txt}
@@ -164,14 +162,11 @@
     @keyframes float {
         0% {
             translate: 0 0;
-            /* transform: translateY(0); */
         }
         50% {
-            /* transform: translateY(-2rem); */
             translate: 0 -1rem;
         }
         100% {
-            /* transform: translateY(0); */
             translate: 0 0;
         }
     }

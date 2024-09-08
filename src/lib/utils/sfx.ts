@@ -3,7 +3,7 @@ import { Howl } from "howler";
 import { get, writable } from "svelte/store";
 import { persisted } from "./persisted";
 
-export const currentHowl = writable<Howl | null>(null);
+export const sfxHowl = writable<Howl | null>(null);
 
 const sounds = [
     {
@@ -15,7 +15,7 @@ const sounds = [
 type SoundEffects = (typeof sounds)[number]["name"];
 
 export async function playSFX(sfx: SoundEffects) {
-    const howl = get(currentHowl);
+    const howl = get(sfxHowl);
     if (howl) {
         // If not playing, just unload
         if (!howl.playing()) {
@@ -41,7 +41,7 @@ export async function playSFX(sfx: SoundEffects) {
         loop: false,
     });
 
-    currentHowl.set(new_howl);
+    sfxHowl.set(new_howl);
     new_howl.play();
 }
 
@@ -50,8 +50,11 @@ export type Song = {
     url: string;
 };
 
-export const audioVolume = persisted("sfx_volume", 0.5);
+export const sfxVolume = persisted("sfx_volume", 0.5);
 
-audioVolume.subscribe((val) => {
-    Howler.volume(val);
+sfxVolume.subscribe((val) => {
+    const howl = get(sfxHowl);
+    if (howl) {
+        howl.volume(val);
+    }
 });
