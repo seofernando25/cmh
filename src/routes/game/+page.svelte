@@ -108,7 +108,7 @@
 
         width: 100%;
         height: 100%;
-        filter: blur(5px);
+        filter: blur(0.2rem);
         scale: 1.1;
         object-fit: cover;
     }
@@ -121,7 +121,8 @@
         right: 5%;
         top: 72.5%;
 
-        background-color: rgb(from #6f1c1b r g b / 0.8);
+        background-color: rgb(from #6f1c1b r g b / 0.5);
+        backdrop-filter: blur(0.2em);
         box-shadow: 0.5em 0.5em 0.1em #99582a;
         border: 0.2rem solid #bb9557;
         display: flex;

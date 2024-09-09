@@ -44,7 +44,7 @@
 
 <details>
     <summary
-        class="p-4 text-theme-yellow rounded-full bg-theme-red w-14 h-14 flex items-center justify-center
+        class="hidden p-4 text-theme-yellow rounded-full bg-theme-red w-14 h-14 flex items-center justify-center
         border-theme-yellow border-2 hover:scale-110 transition-transform"
     >
         <svg
