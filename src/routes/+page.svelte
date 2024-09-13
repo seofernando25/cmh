@@ -9,7 +9,7 @@
 
 <!-- Title opts -->
 <div class="opt-menu">
-    <a class="opt-menu-item" href="/game/intro">
+    <a class="opt-menu-item" href="/game">
         {#if $hasStartedGame === true}
             Continue
         {:else}

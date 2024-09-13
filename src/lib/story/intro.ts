@@ -7,6 +7,7 @@ import road from "$lib/assets/road.png";
 import candyShopBg from "$lib/assets/candyshop.webp";
 import corneliaSprite from "$lib/assets/portraits/cornwitch.png";
 import playerIcon from "$lib/assets/portraits/playericon.png";
+import { ui_layouts } from "$lib/layouts/layout_components";
 
 type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any
     ? A
@@ -40,6 +41,7 @@ export default async (gameSequence: DialogManager) => {
         await gameSequence.dialog(text, opts);
     };
 
+    gameSequence.uiLayoutComponent.set(ui_layouts.IntroLayout);
     gameSequence.dialogOpacity.set(0);
     await gameSequence.sleep(500);
     gameSequence.dialogOpacity.set(1);
@@ -61,7 +63,7 @@ export default async (gameSequence: DialogManager) => {
         easing: elasticOut,
     });
 
-    await goto("/game/");
+    gameSequence.uiLayoutComponent.set(ui_layouts.DefaultLayout);
     await gameSequence.bgOpacity.set(0);
     gameSequence.bgOpacity.set(1, {
         easing: bounceInOut,

@@ -1,6 +1,8 @@
 import { get, writable } from "svelte/store";
 import { typewriter } from "./typewriter";
 import { tweened } from "svelte/motion";
+import type { ComponentType } from "svelte";
+import { ui_layouts } from "$lib/layouts/layout_components";
 
 export type DialogState = {
     showDate: boolean;
@@ -32,6 +34,9 @@ export class DialogManager {
     charLeft = writable<undefined | string>(undefined);
     charRight = writable<undefined | string>(undefined);
     charCenter = writable<undefined | string>(undefined);
+    uiLayoutComponent = writable<undefined | ComponentType>(
+        ui_layouts.IntroLayout
+    );
 
     async question(
         question: string,

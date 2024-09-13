@@ -1,34 +1,16 @@
 <script lang="ts">
-    import emptyPortrait from "$lib/assets/empty.png";
-
-    import { fade } from "svelte/transition";
-
     import { get } from "svelte/store";
-
-    import intro from "$lib/story/intro";
-    import { DialogManager, globalState } from "$lib/utils/dialog";
     import introBg from "$lib/assets/introBG.png";
-    let dateInfo = {
-        name: "",
-        place: "",
-        day: 0,
-    };
-
-    // let charInfo: CharacterDescriptor | undefined;
+    import intro from "$lib/story/intro";
+    import { globalState } from "$lib/utils/dialog";
 
     const state = globalState;
 
     intro(state);
 
-    $: speaker = state.currentSpeaker;
     $: dialogOpacity = state.dialogOpacity;
-    $: currentPortrait = state.currentPortrait;
-    $: charRight = state.charRight;
-    $: charCenter = state.charCenter;
-    $: charLeft = state.charLeft;
     $: txt = state.currentText;
     $: bgOpacity = state.bgOpacity;
-    $: currentBackground = state.currentBackground;
     const skipAction = () => {
         get(state.resolverFn)();
     };
