@@ -5,8 +5,9 @@
 
     import { get } from "svelte/store";
 
-    import { globalState } from "$lib/utils/dialog";
-
+    import intro from "$lib/story/intro";
+    import { DialogManager, globalState } from "$lib/utils/dialog";
+    import introBg from "$lib/assets/introBG.png";
     let dateInfo = {
         name: "",
         place: "",
@@ -14,9 +15,10 @@
     };
 
     // let charInfo: CharacterDescriptor | undefined;
+
     const state = globalState;
 
-    // intro(state);
+    intro(state);
 
     $: speaker = state.currentSpeaker;
     $: dialogOpacity = state.dialogOpacity;
@@ -25,9 +27,8 @@
     $: charCenter = state.charCenter;
     $: charLeft = state.charLeft;
     $: txt = state.currentText;
-    $: currentBackground = state.currentBackground;
-    $: bgBlur = state.bgBlur;
     $: bgOpacity = state.bgOpacity;
+    $: currentBackground = state.currentBackground;
     const skipAction = () => {
         get(state.resolverFn)();
     };
@@ -50,68 +51,22 @@
     }}
 />
 
-{#if $currentBackground}
-    <img
-        transition:fade
-        src={$currentBackground}
-        alt="bg"
-        class="bg"
-        style="filter: blur({$bgBlur}rem);
-    opacity: {$bgOpacity};
-        "
-    />
-{/if}
+<img src={introBg} alt="bg" class="bg" style="opacity: {$bgOpacity}" />
+/>
 
-{#if $charRight}
-    <img
-        transition:fade
-        src={$charRight}
-        alt="portrait"
-        class="char char-right"
-    />
-{/if}
-
-{#if $charCenter}
-    <img
-        transition:fade
-        src={$charCenter}
-        alt="portrait"
-        class="char char-center"
-    />
-{/if}
-
-{#if $charLeft}
-    <img
-        transition:fade
-        src={$charLeft}
-        alt="portrait"
-        class="char char-left"
-    />
-{/if}
-
-{#if !clearMode}
-    <!-- content here -->
-    <div
-        class="dialog"
-        on:click={skipAction}
-        on:keypress={undefined}
-        role="button"
-        tabindex="0"
-        style="opacity: {$dialogOpacity}"
-    >
-        <img
-            src={$currentPortrait ? $currentPortrait : emptyPortrait}
-            alt="portrait"
-            class="portrait {$currentPortrait ? '' : 'no-potrait'}"
-        />
-        <div class="text">
-            {#if $speaker !== ""}
-                {$speaker} <br />
-            {/if}
-            {$txt}
-        </div>
+<!-- content here -->
+<div
+    class="dialog"
+    on:click={skipAction}
+    on:keypress={undefined}
+    role="button"
+    tabindex="0"
+    style="opacity: {$dialogOpacity}"
+>
+    <div class="text">
+        {$txt}
     </div>
-{/if}
+</div>
 
 <style>
     .bg {
@@ -119,43 +74,29 @@
 
         width: 100%;
         height: 100%;
-
-        scale: 1.1;
-        object-fit: cover;
+        object-fit: fill;
     }
 
     .dialog {
         position: absolute;
-        padding: 1em;
-        bottom: 5%;
-        left: 5%;
-        right: 5%;
-        top: 72.5%;
+        padding: 2em;
+        top: 20%;
+        bottom: 20%;
+        left: 20%;
+        right: 20%;
 
-        background-color: rgb(from #6f1c1b r g b / 0.8);
+        background-color: rgb(from var(--color-red) r g b / 0.5);
         backdrop-filter: blur(0.2em);
-        /* box-shadow: 0.5em 0.5em 0.1em #99582a; */
-        border: 0.5rem solid var(--color-yellow);
-        border-radius: 2.5rem;
-        display: flex;
+        border: 1rem solid var(--color-yellow);
+        border-radius: 8rem;
         user-select: none;
-    }
-
-    /* if mobile use dialog top */
-    @media (max-width: 600px) {
-        .dialog {
-            top: 5%;
-            left: 5%;
-            right: 5%;
-            bottom: 72.5%;
-        }
     }
 
     .portrait {
         flex: 0 0 auto;
         box-sizing: border-box;
         height: 100%;
-        width: 5em;
+        width: 7.5em;
         object-fit: scale-down;
         transition: all 0.2s ease-out;
         user-select: none;
@@ -210,6 +151,6 @@
     }
 
     .text {
-        color: #bb9557;
+        color: var(--color-yellow);
     }
 </style>

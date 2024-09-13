@@ -1,4 +1,7 @@
 import cornelia_hmm from "$lib/assets/sfx/cornelia_hmm.mp3";
+import sbbJingle from "$lib/assets/sfx/blink_jingle.mp3";
+import alarmClock from "$lib/assets/sfx/alarm.mp3";
+
 import { Howl } from "howler";
 import { get, writable } from "svelte/store";
 import { persisted } from "./persisted";
@@ -9,6 +12,14 @@ const sounds = [
     {
         name: "Cornelia Hmm",
         url: cornelia_hmm,
+    },
+    {
+        name: "Blink Jingle",
+        url: sbbJingle,
+    },
+    {
+        name: "Alarm Clock",
+        url: alarmClock,
     },
 ] as const;
 

@@ -21,6 +21,9 @@ export class DialogManager {
     currentText = writable("");
     currentPortrait = writable<undefined | string>(undefined);
     currentSpeaker = writable("");
+    currentBackground = writable<undefined | string>(undefined);
+    bgBlur = tweened(0);
+    bgOpacity = tweened(1);
     resolverFn = writable(() => {});
     currentPrompts = writable<string[]>([]);
     pickedPrompt = writable(-1);
@@ -155,6 +158,15 @@ export class DialogManager {
         }
         this.currentSpeaker.set(o?.name ?? "");
         let speed = o?.speed ?? 25;
+        if (speed <= 0) {
+            this.currentText.set(question);
+            return new Promise<void>((resolve) => {
+                this.resolverFn.set(() => {
+                    resolve();
+                });
+            });
+        }
+
         return new Promise<void>((resolve) => {
             const writer = typewriter(question, speed);
             const sub = writer.subscribe(async (text) => {
@@ -187,10 +199,4 @@ export class DialogManager {
     }
 }
 
-export class WebDateManager {
-    busyInAction = writable(false);
-
-    constructor(private dateInfo: DialogManager) {}
-
-    async playDate(date: DialogSequence) {}
-}
+export const globalState = new DialogManager();
