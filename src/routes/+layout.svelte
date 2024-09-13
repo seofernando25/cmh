@@ -1,7 +1,32 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import "../app.css";
     import SoundPlayer from "./SoundPlayer.svelte";
+    import { globalState } from "$lib/utils/dialog";
+
+    let shiftPressed = false;
+    $: resolverFn = globalState.resolverFn;
+
+    let skipIntervalId: number | undefined = undefined;
+
+    $: {
+        if (shiftPressed && skipIntervalId === undefined) {
+            skipIntervalId = setInterval(() => {
+                $resolverFn();
+            }, 10);
+        }
+
+        if (!shiftPressed) {
+            clearInterval(skipIntervalId);
+            skipIntervalId = undefined;
+        }
+    }
 </script>
+
+<svelte:document
+    on:keydown={(e) => (shiftPressed = e.shiftKey)}
+    on:keyup={(e) => (shiftPressed = e.shiftKey)}
+/>
 
 <div class="page-wrapper">
     <div class="content-wrapper">

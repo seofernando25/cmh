@@ -1,74 +1,53 @@
 <script lang="ts">
-    import emptyPortrait from "$lib/assets/empty.png";
-
-    import { fade } from "svelte/transition";
-
     import { get } from "svelte/store";
 
-    import intro from "$lib/story/intro";
-    import { DialogManager, globalState } from "$lib/utils/dialog";
     import introBg from "$lib/assets/introBG.png";
-    let dateInfo = {
-        name: "",
-        place: "",
-        day: 0,
-    };
+    import intro from "$lib/story/intro";
+    import { goto } from "$app/navigation";
 
-    // let charInfo: CharacterDescriptor | undefined;
-
-    const state = globalState;
-
-    intro(state);
-
-    $: speaker = state.currentSpeaker;
-    $: dialogOpacity = state.dialogOpacity;
-    $: currentPortrait = state.currentPortrait;
-    $: charRight = state.charRight;
-    $: charCenter = state.charCenter;
-    $: charLeft = state.charLeft;
-    $: txt = state.currentText;
-    $: bgOpacity = state.bgOpacity;
-    $: currentBackground = state.currentBackground;
-    const skipAction = () => {
-        get(state.resolverFn)();
-    };
-
-    // press t to clear mode
-
-    let clearMode = false;
-
-    const keydownHandler = (e: KeyboardEvent) => {
-        if (e.key === "t") {
-            clearMode = !clearMode;
-        }
-    };
+    import Button from "$lib/components/Button.svelte";
 </script>
 
-<svelte:window
-    on:keydown={keydownHandler}
-    on:dragstart={(e) => {
-        e.preventDefault();
-    }}
-/>
+<img src={introBg} alt="bg" class="bg" />
 
-<img src={introBg} alt="bg" class="bg" style="opacity: {$bgOpacity}" />
-/>
-
+<div class="back-button">
+    <Button
+        on:click={() => {
+            goto("/");
+        }}>Back</Button
+    >
+</div>
 <!-- content here -->
-<div
-    class="dialog"
-    on:click={skipAction}
-    on:keypress={undefined}
-    role="button"
-    tabindex="0"
-    style="opacity: {$dialogOpacity}"
->
+<div class="dialog">
     <div class="text">
-        {$txt}
+        <!-- Improve this description -->
+        Shift to skip <br />
+        Press T to clear mode
     </div>
 </div>
 
+<!-- Top left button to go back -->
+
 <style>
+    .back-button {
+        z-index: 100;
+        position: absolute;
+        /* background-color: red; */
+        top: 1rem;
+        left: 1rem;
+        /* background-color: var(--color-red);
+        padding: 0.5rem 1rem;
+        color: var(--color-yellow);
+        border: 0.5rem solid var(--color-yellow);
+        border-radius: 8rem;
+        transition: all 0.2s ease-out; */
+    }
+
+    .back-button:hover {
+        --color-yellow: white;
+        color: white;
+    }
+
     .bg {
         position: absolute;
 

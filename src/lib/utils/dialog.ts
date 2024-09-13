@@ -54,66 +54,6 @@ export class DialogManager {
         });
     }
 
-    // async dateFadeIn(duration = 1000, o?: { block?: boolean }) {
-    //     let block = o?.block ?? false;
-    //     return new Promise<void>((resolve) => {
-    //         let start = performance.now();
-    //         let done = false;
-    //         this.dateOpacity.set(0);
-    //         const step = (timestamp: number) => {
-    //             if (done) {
-    //                 this.dateOpacity.set(1);
-    //                 return;
-    //             }
-    //             const progress = timestamp - start;
-    //             this.dateOpacity.set(progress / duration);
-    //             if (progress < duration) {
-    //                 window.requestAnimationFrame(step);
-    //             } else {
-    //                 this.dateOpacity.set(1);
-    //                 if (!block) {
-    //                     get(this.resolverFn)();
-    //                 }
-    //             }
-    //         };
-    //         window.requestAnimationFrame(step);
-    //         this.resolverFn.set(() => {
-    //             done = true;
-    //             resolve();
-    //         });
-    //     });
-    // }
-
-    // async dateFadeOut(duration = 1000, o?: { block?: boolean }) {
-    //     let block = o?.block ?? true;
-    //     return new Promise<void>((resolve) => {
-    //         let start = performance.now();
-    //         let done = false;
-    //         this.dateOpacity.set(1);
-    //         const step = (timestamp: number) => {
-    //             if (done) {
-    //                 this.dateOpacity.set(0);
-    //                 return;
-    //             }
-    //             const progress = timestamp - start;
-    //             this.dateOpacity.set(1 - progress / duration);
-    //             if (progress < duration) {
-    //                 window.requestAnimationFrame(step);
-    //             } else {
-    //                 this.dateOpacity.set(0);
-    //                 if (!block) {
-    //                     get(this.resolverFn)();
-    //                 }
-    //             }
-    //         };
-    //         window.requestAnimationFrame(step);
-    //         this.resolverFn.set(() => {
-    //             done = true;
-    //             resolve();
-    //         });
-    //     });
-    // }
-
     async sleep(
         duration = 0,
         o?: {
@@ -192,10 +132,6 @@ export class DialogManager {
                 }, o.autoDelay);
             }
         });
-    }
-
-    async typewrite(text: string) {
-        return "";
     }
 }
 
