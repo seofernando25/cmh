@@ -402,10 +402,20 @@ export default async (gameSequence: DialogManager) => {
     );
 
     // And with that, the line clicks dead, leaving you standing there, phone in hand, heart racing, and a knot of worry tightening in your stomach.
+    await dialogNarrator(
+        "And with that, the line clicks dead, leaving you standing there, phone in hand, heart racing, and a knot of worry tightening in your stomach."
+    );
 
     // You lower the phone slowly, the weight of the conversation settling in.
+    await dialogNarrator(
+        "You lower the phone slowly, the weight of the conversation settling in."
+    );
 
     // Cornelia looks over, her brows furrowed with concern. You take a deep breath and walk toward her, rubbing the back of your neck.
+    await dialogNarrator(
+        "Cornelia looks over, her brows furrowed with concern. You take a deep breath and walk toward her, rubbing the back of your neck."
+    );
 
     // “So, that was... weird,”
+    await dialogMe("So, that was... weird,");
 };
