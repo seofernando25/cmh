@@ -16,11 +16,9 @@
 </div>
 
 <div class="dialog">
-    <div class="text">
-        <!-- Improve this description -->
-        Shift to skip <br />
-        Press T to clear mode
-    </div>
+    <!-- Improve this description -->
+    Shift to skip <br />
+    Press T to clear mode
 </div>
 
 <style>

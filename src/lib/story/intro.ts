@@ -41,6 +41,17 @@ export default async (gameSequence: DialogManager) => {
         await gameSequence.dialog(text, opts);
     };
 
+    const dialogUnknown = async (
+        text: string,
+        opts?: ArgumentTypes<typeof gameSequence.dialog>[1]
+    ) => {
+        gameSequence.currentPortrait.set(undefined);
+        await gameSequence.dialog(text, {
+            ...opts,
+            name: "???",
+        });
+    };
+
     gameSequence.uiLayoutComponent.set(ui_layouts.IntroLayout);
     gameSequence.dialogOpacity.set(0);
     await gameSequence.sleep(500);
@@ -289,13 +300,112 @@ export default async (gameSequence: DialogManager) => {
     );
 
     // replace by dialog Unknown
-    await dialogNarrator("I'd like to place a special order,", {
-        name: "???",
-    });
+    await dialogUnknown("I'd like to place a special order,");
 
     await dialogMe(
         "Of course, we take special orders. What exactly were you looking for?"
     );
 
-    await dialogNarrator("The voice on the other end pauses briefly");
+    await dialogNarrator(
+        "The voice on the other end begins, steady and deliberate."
+    );
+    await dialogUnknown("First, I’ll need oak honey-", {
+        autoDelay: 2000,
+    });
+    await dialogUnknown("But not just any kind-", {
+        autoDelay: 2000,
+    });
+    await dialogUnknown("it must come from the old Grove on the edge of town.");
+    await dialogUnknown("The flavor is dark, rich... earthy.");
+    await dialogUnknown(
+        "You’ll use it to craft dark honeycomb toffees, rich and dense, the kind that melt slowly on the tongue.  "
+    );
+    await dialogUnknown(
+        "The flavor should be as deep as the forest it comes from."
+    );
+
+    await dialogNarrator("A brief pause, then they continue");
+
+    await dialogUnknown(
+        "Next, you’ll need to collect rose hips, but only from the wild roses that grow by the cemetery."
+    );
+
+    await dialogUnknown(
+        "Those flowers bloom under the shadow of the tombstones. Their hips are small, black as night, and tart enough to bite."
+    );
+    await dialogUnknown(
+        "For the rose hips, you’ll need to turn them into rose-hip jelly bonbons."
+    );
+    await dialogUnknown(
+        "The filling should be sharp, almost sour, with just enough sweetness to balance the bitterness of the cemetery roses."
+    );
+
+    await dialogNarrator("The voice grows quieter, almost a whisper now.");
+
+    await dialogUnknown(
+        "Finally, you’ll have to fetch moonweed from the bottom of the old town well."
+    );
+    await dialogUnknown("It grows deep in the water, hidden in the darkness.");
+    await dialogUnknown(
+        "Pale, delicate. Few dare to go down there... but that’s what I need."
+    );
+    await dialogUnknown(
+        "the moonweed… it must be made into moonweed taffy. Soft, pale, and delicate, like the plant itself."
+    );
+    await dialogUnknown(
+        "It should taste of something faintly otherworldly—cool, almost bitter, with a sweetness that lingers just on the edge."
+    );
+
+    await dialogNarrator(
+        "You grip the phone tightly, eyes narrowing as you listen to the strange requests. Glancing over at Cornelia, who’s busy stocking the shelves, you catch her eye for a brief moment."
+    );
+
+    await dialogNarrator(
+        "She raises an eyebrow, sensing something off, but you look away quickly, unsure how to even explain the bizarre ingredients."
+    );
+
+    await dialogMe("I’m not sure we can—");
+    await dialogNarrator("You start, hesitation creeping into your voice.");
+
+    await dialogNarrator(
+        "Before you can finish, the voice on the other end interrupts, smooth and calm."
+    );
+
+    await dialogUnknown(
+        "I’ll pay you handsomely. Triple your normal rate. Enough to cover your shop’s expenses for months."
+    );
+
+    await dialogNarrator(
+        "Your breath catches, the promise of that much money too tempting to ignore."
+    );
+
+    await dialogNarrator(
+        "You look at Cornelia again, biting your lip. She gives you a curious glance, still unaware of the conversation, but you can feel her silent question: What’s going on?"
+    );
+
+    await dialogNarrator(
+        "There’s a long pause before you finally speak again."
+    );
+
+    await dialogMe("Triple, huh?");
+
+    await dialogNarrator(
+        "The offer hangs heavy in the air, difficult to refuse."
+    );
+
+    await dialogUnknown(
+        "Call me on Halloween night. I’ll tell you where to deliver the sweets."
+    );
+
+    await dialogNarrator(
+        "The voice offers a final push. I'll tell you where to deliver the sweets."
+    );
+
+    // And with that, the line clicks dead, leaving you standing there, phone in hand, heart racing, and a knot of worry tightening in your stomach.
+
+    // You lower the phone slowly, the weight of the conversation settling in.
+
+    // Cornelia looks over, her brows furrowed with concern. You take a deep breath and walk toward her, rubbing the back of your neck.
+
+    // “So, that was... weird,”
 };
