@@ -45,9 +45,7 @@
     tabindex="0"
     style="opacity: {$dialogOpacity}"
 >
-    <div class="text">
-        {$txt}
-    </div>
+    {$txt}
 </div>
 
 <style>
@@ -61,6 +59,7 @@
 
     .dialog {
         position: absolute;
+        color: var(--color-yellow);
         padding: 2em;
         top: 20%;
         bottom: 20%;
@@ -74,27 +73,6 @@
         user-select: none;
     }
 
-    .portrait {
-        flex: 0 0 auto;
-        box-sizing: border-box;
-        height: 100%;
-        width: 7.5em;
-        object-fit: scale-down;
-        transition: all 0.2s ease-out;
-        user-select: none;
-    }
-
-    .no-potrait {
-        width: 0;
-    }
-
-    .char {
-        position: absolute;
-        transition: all 0.2s ease-out;
-        height: 90%;
-        animation: float 0.4s ease-in-out infinite;
-    }
-
     @keyframes float {
         0% {
             translate: 0 0;
@@ -105,34 +83,5 @@
         100% {
             translate: 0 0;
         }
-    }
-
-    .char-right {
-        right: 5%;
-        bottom: -10rem;
-        object-fit: contain;
-    }
-
-    .char-left {
-        left: 5%;
-        bottom: -10rem;
-        object-fit: contain;
-        transform: scaleX(-1);
-    }
-
-    .char-center {
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: -10rem;
-        object-fit: contain;
-        scale: 1;
-    }
-
-    .char:hover {
-        scale: 1.1;
-    }
-
-    .text {
-        color: var(--color-yellow);
     }
 </style>

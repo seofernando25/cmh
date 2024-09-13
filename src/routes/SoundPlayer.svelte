@@ -98,10 +98,6 @@
 </details>
 
 <style>
-    .player-hidden {
-        transform: translateX(-95%);
-    }
-
     details {
         user-select: none;
         position: absolute;
