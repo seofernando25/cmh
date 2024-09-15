@@ -4,7 +4,7 @@ import type { DialogManager } from "$lib/utils/dialog";
 import { playSFX } from "$lib/utils/sfx";
 import { bounceInOut, elasticOut } from "svelte/easing";
 import road from "$lib/assets/road.png";
-import candyShopBg from "$lib/assets/candyshop.webp";
+import candyShopBg from "$lib/assets/bg/bg_shop.png";
 import corneliaSprite from "$lib/assets/portraits/cornwitch.png";
 import playerIcon from "$lib/assets/portraits/playericon.png";
 import { ui_layouts } from "$lib/layouts/layout_components";
